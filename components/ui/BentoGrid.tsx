@@ -19,7 +19,7 @@ export const BentoGrid = ({
     return (
         <div
             className={cn(
-                "grid md:auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto ",
+                "grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 md:grid-row-7 gap-4 lg:gap-8 mx-auto",
                 className
             )}
         >
@@ -51,6 +51,15 @@ export const BentoGridItem = ({
     const leftLists = ["ReactJS", "Express", "Typescript"];
     const rightLists = ["VueJS", "NuxtJS", "GraphQL"];
 
+    const defaultOptions = {
+        loop: copied,
+        autoplay: copied,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+        },
+    };
+
     const handleCopy = () => {
         navigator.clipboard.writeText('sagnikghosh18@gmail.com');
         setCopied(true);
@@ -68,32 +77,32 @@ export const BentoGridItem = ({
                     "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
             }}
         >
-            <div className={`${id == 6 && 'flex justify-center'} h-full`}>
+            <div className={`${id === 6 && "flex justify-center"} h-full`}>
                 <div className="w-full h-full absolute">
                     {img && (
                         <img
                             src={img}
                             alt={img}
-                            className={cn(imgClassName, 'object-cover, object-center')}
+                            className={cn(imgClassName, "object-cover object-center ")}
                         />
                     )}
                 </div>
-
-                <div className={`absolute right-0 -bottom-0 ${id == 5 && 'w-full opacity-80'}`}>
+                <div
+                    className={`absolute right-0 -bottom-5 ${id === 5 && "w-full opacity-80"
+                        } `}
+                >
                     {spareImg && (
                         <img
                             src={spareImg}
                             alt={spareImg}
-                            className='object-cover object-center w-full h-full'
+                            className="object-cover object-center w-full h-full"
                         />
                     )}
                 </div>
 
                 {id === 6 && (
                     <BackgroundGradientAnimation>
-                        <div
-                            className="absolute z-50 flex items-center justify-center text-white font-bold "
-                        />
+                        <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
                     </BackgroundGradientAnimation>
                 )}
 
@@ -106,17 +115,16 @@ export const BentoGridItem = ({
                     <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
                         {description}
                     </div>
-
-                    <div className="font-sans font-bold text-lg lg:text-3xl max-w-96 z-10">
+                    <div
+                        className={`font-sans text-lg lg:text-3xl max-w-96 font-bold z-10`}
+                    >
                         {title}
                     </div>
-
 
                     {id === 2 && <GridGlobe />}
 
                     {id === 3 && (
                         <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2">
-                            {/* tech stack lists */}
                             <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
                                 {leftLists.map((item, i) => (
                                     <span
@@ -141,20 +149,12 @@ export const BentoGridItem = ({
                             </div>
                         </div>
                     )}
-
                     {id === 6 && (
                         <div className="mt-5 relative">
-                            <div className="absolute -bottom-5 right-0">
-                                <Lottie
-                                    options={{
-                                        loop: copied,
-                                        autoplay: copied,
-                                        animationData: animationData,
-                                        rendererSettings: {
-                                            preserveAspectRatio: 'xMidYMid slice'
-                                        }
-                                    }}
-                                />
+                            <div
+                                className={`absolute -bottom-5 right-0 ${copied ? "block" : "block"}`}
+                            >
+                                <Lottie options={defaultOptions} height={200} width={400} />
                             </div>
 
                             <MagicButton
