@@ -48,15 +48,15 @@ export const BentoGridItem = ({
     spareImg?: string
 }) => {
     const [copied, setCopied] = useState(false);
-    const leftLists = ["ReactJS", "Express", "Typescript"];
-    const rightLists = ["VueJS", "NuxtJS", "GraphQL"];
+    const leftLists = ["MERN Stack", "NextJS", "Typescript"];
+    const rightLists = ["GoLang", "Java", "AWS"];
 
     const defaultOptions = {
         loop: copied,
         autoplay: copied,
         animationData: animationData,
         rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice",
+        preserveAspectRatio: "xMidYMid slice",
         },
     };
 
