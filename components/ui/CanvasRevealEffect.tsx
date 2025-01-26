@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { cn } from "@/lib/utils";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -33,11 +35,11 @@ export const CanvasRevealEffect = ({
                         opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
                     }
                     shader={`
-              float animation_speed_factor = ${animationSpeed.toFixed(1)};
-              float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
-              opacity *= step(intro_offset, u_time * animation_speed_factor);
-              opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
-            `}
+                        float animation_speed_factor = ${animationSpeed.toFixed(1)};
+                        float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
+                        opacity *= step(intro_offset, u_time * animation_speed_factor);
+                        opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
+                    `}
                     center={["x", "y"]}
                 />
             </div>
@@ -190,7 +192,7 @@ const ShaderMaterial = ({
     uniforms: Uniforms;
 }) => {
     const { size } = useThree();
-    const ref = useRef<THREE.Mesh>();
+    const ref = useRef<THREE.Mesh>(null);
     let lastFrameTime = 0;
 
     useFrame(({ clock }) => {
