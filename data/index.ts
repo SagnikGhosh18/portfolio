@@ -121,15 +121,7 @@ export const projects = [
         img: "/p-travel.png",
         iconLists: ["/next.svg", "/tail.svg", "/ts.svg"],
         link: "https://travel-app-ui-xi.vercel.app/",
-    },
-    {
-        id: 3,
-        title: "LiveDocs - A collaborative document editor.",
-        des: "Built with Next.js to handle the user interface, Liveblocks for real-time features and styled with TailwindCSS, LiveDocs is a clone of Goole Docs. The primary goal is to demonstrate the developer's skills in realtime enviroment that creates a lasting impact.",
-        img: "/p-ce.png",
-        iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/c.svg"],
-        link: "https://collaborative-editor-lovat.vercel.app/",
-    },
+    }
 ];
 
 export const testimonials = [

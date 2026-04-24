@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Sagnik Ghosh",
   },
   description:
-    "Sagnik Ghosh is a fullstack engineer specializing in Next.js, TypeScript, and Go. Building thoughtful interfaces and the systems that power them.",
+    "Sagnik Ghosh is a fullstack engineer (React, Node.js, AWS, Python) and VIT Gold Medalist. Currently SDE at ZenTrades.ai — shipping production features across web, mobile, and cloud.",
   keywords: [
     "Sagnik Ghosh",
     "fullstack engineer",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     "TypeScript",
     "React",
     "portfolio",
-    "Bengaluru",
+    "Pune",
     "ZenTrades",
   ],
   authors: [{ name: "Sagnik Ghosh", url: SITE_URL }],
@@ -81,7 +81,7 @@ const jsonLd = {
   name: "Sagnik Ghosh",
   jobTitle: "Fullstack Engineer",
   url: SITE_URL,
-  email: "sagnighosh18@gmail.com",
+  email: "sagnikghosh18@gmail.com",
   sameAs: [
     "https://github.com/SagnikGhosh18",
     "https://www.linkedin.com/in/sagnik-ghosh-49b25820b/",
@@ -92,13 +92,15 @@ const jsonLd = {
   },
   knowsAbout: [
     "Next.js",
-    "TypeScript",
     "React",
+    "React Native",
+    "TypeScript",
     "Node.js",
-    "Go",
-    "PostgreSQL",
+    "Python",
     "AWS",
-    "AI Agents",
+    "LangChain",
+    "MongoDB",
+    "MySQL",
   ],
   address: {
     "@type": "PostalAddress",

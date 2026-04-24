@@ -3,9 +3,8 @@ import { portfolioStack } from "@/data/portfolio";
 const TRAITS = [
   "collaboration",
   "open communication",
-  "ships often",
-  "tz-flexible",
-  "long-form thinking",
+  "ships fast",
+  "metric-driven",
 ];
 
 export default function AboutSection() {
@@ -30,8 +29,9 @@ export default function AboutSection() {
           {/* Bio */}
           <div>
             <p className="lede" style={{ margin: 0, marginBottom: 28 }}>
-              I&apos;m a fullstack engineer who treats the interface and the
-              system underneath it as one design problem.
+              Fullstack engineer who graduated top of class at VIT Vellore and
+              has been shipping production code at{" "}
+              <em>ZenTrades.ai</em> ever since.
             </p>
             <p
               style={{
@@ -41,12 +41,13 @@ export default function AboutSection() {
                 marginTop: 0,
               }}
             >
-              Most of my recent work has been at{" "}
-              <strong style={{ color: "var(--ink)" }}>ZenTrades</strong> —
-              shipping production features against tight deadlines, owning
-              end-to-end delivery, and now teaching the product to think with AI
-              agents. I prioritize collaboration, clear writing, and code that
-              the next person can read without me in the room.
+              I work across the whole stack — React and React Native on the
+              front, Node.js and Python on the back, AWS and Docker holding it
+              together. Recent work spans architecting a parallel AWS Lambda
+              pipeline that unblocked a market expansion, optimizing
+              Puppeteer-based PDF generation to cut memory usage by up to 80%,
+              and integrating AI recommendation systems that hit 87% accuracy in
+              production.
             </p>
             <p
               style={{
@@ -55,8 +56,9 @@ export default function AboutSection() {
                 color: "var(--ink-2)",
               }}
             >
-              I&apos;m flexible across timezones, allergic to scope-creep, and
-              at my best on small teams that move fast and respect the user.
+              I care about measurable outcomes, clear communication, and code
+              that the next person can change without a call to me. Available
+              across timezones; at my best on small teams moving fast.
             </p>
 
             <div

@@ -13,29 +13,23 @@ function ProjectRow({
   total: number;
 }) {
   const [hover, setHover] = useState(false);
+  const isExternal = p.href !== "N/A";
 
-  return (
-    <a
-      href={p.href}
-      target="_blank"
-      rel="noreferrer"
-      aria-label={`${p.title} — opens in new tab`}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      className="project-row-grid"
-      style={{
-        paddingTop: 36,
-        paddingBottom: 36,
-        paddingLeft: hover ? 12 : 0,
-        borderTop: "1px solid var(--line)",
-        borderBottom:
-          index === total - 1 ? "1px solid var(--line)" : "none",
-        position: "relative",
-        transition: "padding .35s cubic-bezier(.3,.7,.4,1)",
-        textDecoration: "none",
-        color: "inherit",
-      }}
-    >
+  const rowStyle: React.CSSProperties = {
+    paddingTop: 36,
+    paddingBottom: 36,
+    paddingLeft: hover && isExternal ? 12 : 0,
+    borderTop: "1px solid var(--line)",
+    borderBottom: index === total - 1 ? "1px solid var(--line)" : "none",
+    position: "relative",
+    transition: "padding .35s cubic-bezier(.3,.7,.4,1)",
+    textDecoration: "none",
+    color: "inherit",
+    cursor: isExternal ? "pointer" : "default",
+  };
+
+  const content = (
+    <>
       {/* Number + year */}
       <div
         className="mono"
@@ -112,7 +106,7 @@ function ProjectRow({
         </div>
       </div>
 
-      {/* Arrow */}
+      {/* Arrow — only shown for external links */}
       <div
         className="project-row-arrow"
         style={{
@@ -122,69 +116,101 @@ function ProjectRow({
           alignItems: "center",
         }}
       >
+        {isExternal && (
+          <div
+            aria-hidden
+            style={{
+              width: 44,
+              height: 44,
+              borderRadius: "50%",
+              border: "1px solid var(--line-2)",
+              display: "grid",
+              placeItems: "center",
+              background: hover ? p.accent : "transparent",
+              color: hover ? "#0c0a07" : "var(--ink-2)",
+              transition: "all .3s cubic-bezier(.3,.7,.4,1)",
+              transform: hover ? "rotate(-45deg) scale(1.05)" : "rotate(0)",
+            }}
+          >
+            →
+          </div>
+        )}
+      </div>
+
+      {/* Floating hover preview — only for external links */}
+      {isExternal && (
         <div
           aria-hidden
           style={{
-            width: 44,
-            height: 44,
-            borderRadius: "50%",
-            border: "1px solid var(--line-2)",
-            display: "grid",
-            placeItems: "center",
-            background: hover ? p.accent : "transparent",
-            color: hover ? "#0c0a07" : "var(--ink-2)",
-            transition: "all .3s cubic-bezier(.3,.7,.4,1)",
-            transform: hover ? "rotate(-45deg) scale(1.05)" : "rotate(0)",
-          }}
-        >
-          →
-        </div>
-      </div>
-
-      {/* Floating hover preview */}
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          right: hover ? "12%" : "8%",
-          top: "50%",
-          transform: `translateY(-50%) rotate(${hover ? -3 : -8}deg) scale(${hover ? 1 : 0.85})`,
-          width: 220,
-          height: 140,
-          borderRadius: 10,
-          background: `linear-gradient(135deg, ${p.bg}, color-mix(in srgb, ${p.accent} 30%, ${p.bg}))`,
-          border: `1px solid ${p.accent}`,
-          opacity: hover ? 0.55 : 0,
-          pointerEvents: "none",
-          transition: "all .45s cubic-bezier(.3,.7,.4,1)",
-          overflow: "hidden",
-          zIndex: 0,
-        }}
-      >
-        <div
-          style={{
-            padding: 16,
-            fontFamily: "var(--mono)",
-            fontSize: 10,
-            color: p.accent,
-          }}
-        >
-          {p.title.toLowerCase().replace(/\s+/g, "-")}.preview
-        </div>
-        <div
-          style={{
             position: "absolute",
-            left: 16,
-            right: 16,
-            bottom: 16,
-            height: 60,
-            background: "rgba(255,255,255,.04)",
-            borderRadius: 6,
-            border: "1px dashed rgba(255,255,255,.1)",
+            right: hover ? "12%" : "8%",
+            top: "50%",
+            transform: `translateY(-50%) rotate(${hover ? -3 : -8}deg) scale(${hover ? 1 : 0.85})`,
+            width: 220,
+            height: 140,
+            borderRadius: 10,
+            background: `linear-gradient(135deg, ${p.bg}, color-mix(in srgb, ${p.accent} 30%, ${p.bg}))`,
+            border: `1px solid ${p.accent}`,
+            opacity: hover ? 0.55 : 0,
+            pointerEvents: "none",
+            transition: "all .45s cubic-bezier(.3,.7,.4,1)",
+            overflow: "hidden",
+            zIndex: 0,
           }}
-        />
-      </div>
-    </a>
+        >
+          <div
+            style={{
+              padding: 16,
+              fontFamily: "var(--mono)",
+              fontSize: 10,
+              color: p.accent,
+            }}
+          >
+            {p.title.toLowerCase().replace(/\s+/g, "-")}.preview
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              left: 16,
+              right: 16,
+              bottom: 16,
+              height: 60,
+              background: "rgba(255,255,255,.04)",
+              borderRadius: 6,
+              border: "1px dashed rgba(255,255,255,.1)",
+            }}
+          />
+        </div>
+      )}
+    </>
+  );
+
+  if (isExternal) {
+    return (
+      <a
+        href={p.href}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`${p.title} — opens in new tab`}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        className="project-row-grid"
+        style={rowStyle}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="project-row-grid"
+      style={rowStyle}
+    >
+      {content}
+    </div>
   );
 }
 
@@ -200,7 +226,7 @@ export default function ProjectsSection() {
           <div>
             <div className="sec-num">02 — Selected work</div>
             <h2 className="section-title" style={{ marginTop: 14 }}>
-              Three recent <em>builds.</em>
+              Selected <em>builds.</em>
             </h2>
           </div>
           <p className="sec-meta">

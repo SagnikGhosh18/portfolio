@@ -37,7 +37,7 @@ export default function HeroSection() {
           }}
         >
           <span className="eyebrow">— Portfolio · Vol. IV · MMXXVI</span>
-          <span className="eyebrow">Bengaluru, IN · UTC+5:30</span>
+          <span className="eyebrow">Pune, IN · UTC+5:30</span>
         </div>
 
         {/* Display heading */}
@@ -82,18 +82,18 @@ export default function HeroSection() {
         <div className="hero-facts-grid">
           <HeroFact
             label="Currently"
-            value="SDE @ ZenTrades"
-            sub="Building AI agents into the core product"
+            value="SDE @ ZenTrades.ai"
+            sub="AWS Lambda, React Native, AI recommendation systems"
           />
           <HeroFact
             label="Stack"
-            value="Next.js · TypeScript · Go"
-            sub="Fullstack across React, Node, and cloud infra"
+            value="React · Node.js · AWS"
+            sub="Fullstack across web, mobile, and cloud infra"
           />
           <HeroFact
-            label="Open to"
-            value="Product collaborations"
-            sub="Contract or full-time, remote-first"
+            label="Education"
+            value="VIT Vellore · Gold Medal"
+            sub="B.Tech CSE, highest scoring student in stream"
           />
         </div>
       </div>

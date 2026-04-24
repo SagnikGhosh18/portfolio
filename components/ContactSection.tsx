@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const EMAIL = "sagnighosh18@gmail.com";
+const EMAIL = "sagnikghosh18@gmail.com";
 
 interface FooterItemProps {
   label: string;
@@ -173,7 +173,7 @@ export default function ContactSection() {
           }}
         >
           <span>© MMXXVI — Sagnik Ghosh</span>
-          <span>Designed &amp; built in Bengaluru</span>
+          <span>Designed &amp; built in Pune</span>
           <span>v4.2 — last edit Apr 2026</span>
         </footer>
       </div>
