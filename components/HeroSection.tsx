@@ -31,7 +31,7 @@ export default function HeroSection() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: 64,
+            marginBottom: "var(--hero-meta-mb)",
             flexWrap: "wrap",
             gap: 16,
           }}

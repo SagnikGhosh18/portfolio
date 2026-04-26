@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,6 +19,14 @@ const instrumentSerif = Instrument_Serif({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   weight: ["400", "500"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  variable: "--font-display",
+  axes: ["WONK"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -123,7 +131,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+        className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
       >
         <a href="#main-content" className="skip-link">
           Skip to main content

@@ -16,14 +16,15 @@
   --accent:    #ff6b3d;
   --accent-3:  rgba(255, 107, 61, 0.14);
 
-  --serif: var(--font-serif), "Instrument Serif", "Times New Roman", serif;
-  --sans:  var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --mono:  var(--font-mono), "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --serif:   var(--font-serif), "Instrument Serif", "Times New Roman", serif;
+  --sans:    var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono:    var(--font-mono), "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --pad:         clamp(20px, 4vw, 56px);
-  --maxw:        1240px;
-  --section-pad: 120px;
-  --hero-pad:    110px;
+  --pad:            clamp(20px, 4vw, 56px);
+  --maxw:           1240px;
+  --section-pad:    120px;
+  --hero-pad:      110px;
+  --hero-meta-mb:  64px;
 }
 
 /* ── Base resets ─────────────────────────────────────────────────────────── */
@@ -65,7 +66,7 @@ body::before {
 
 /* ── Typography ──────────────────────────────────────────────────────────── */
 .display {
-  font-family: var(--serif);
+  font-family: var(--font-display), serif;
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.02em;
@@ -335,6 +336,28 @@ body::before {
   grid-template-columns: 80px 1fr 1.1fr 80px;
   gap: 24px;
   align-items: center;
+}
+
+/* ── Laptop viewport-height fit (1366×768, 1280×800, 1440×900) ───────────── */
+@media (max-height: 860px) and (min-width: 900px) {
+  :root {
+    --hero-pad:     52px;
+    --hero-meta-mb: 32px;
+  }
+  .display {
+    font-size: clamp(40px, 6vw, 86px);
+  }
+  .hero-content-grid {
+    margin-top: 28px;
+    gap: 32px;
+  }
+  .hero-facts-grid {
+    margin-top: 36px;
+    padding-top: 20px;
+  }
+  .lede {
+    font-size: clamp(18px, 2vw, 26px);
+  }
 }
 
 /* ── Responsive breakpoints ──────────────────────────────────────────────── */
