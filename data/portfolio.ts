@@ -17,16 +17,22 @@ export interface Experience {
   role: string;
   period: string;
   location: string;
+  hash: string;
+  current: boolean;
   bullets: string[];
 }
 
 export interface StackGroup {
+  /** lowercase, snake_case key rendered inside the stack.json code block */
+  key: string;
   group: string;
   items: string[];
 }
 
 export interface ApproachPhase {
   n: string;
+  /** snake_case function name rendered in the approach code block */
+  fn: string;
   title: string;
   body: string;
 }
@@ -95,7 +101,9 @@ export const portfolioExperience: Experience[] = [
     company: "ZenTrades.ai",
     role: "Software Development Engineer",
     period: "Jul '24 — Now",
-    location: "Pune",
+    location: "Pune, IN",
+    hash: "a3f8912e",
+    current: true,
     bullets: [
       "Architected parallel execution via AWS Lambda and Google Apps Script, cutting document generation to under 5 minutes and unblocking the Canadian market launch.",
       "Refactored Puppeteer-based PDF generation to a single browser instance, reducing memory usage by 50–80% and CPU load by 30–60%.",
@@ -108,7 +116,9 @@ export const portfolioExperience: Experience[] = [
     company: "ZenTrades.ai",
     role: "Associate Developer",
     period: "Feb – Jul '24",
-    location: "Pune",
+    location: "Pune, IN",
+    hash: "b1c2d34f",
+    current: false,
     bullets: [
       "Built saved filter preferences with React and Material UI, reducing user interaction steps by over 75%.",
       "Designed a scalable data schema and RESTful APIs for efficient storage, retrieval, and seamless frontend-backend integration.",
@@ -117,26 +127,29 @@ export const portfolioExperience: Experience[] = [
 ];
 
 export const portfolioStack: StackGroup[] = [
-  { group: "Frontend", items: ["Next.js", "React", "React Native", "TypeScript", "Tailwind"] },
-  { group: "Backend", items: ["Node.js", "Express.js", "Django", "Python"] },
-  { group: "Database", items: ["MySQL", "MongoDB", "Redis"] },
-  { group: "Cloud", items: ["AWS", "Docker", "Nginx", "ElasticSearch"] },
-  { group: "AI / Tools", items: ["LangChain", "Git", "Linux"] },
+  { key: "frontend", group: "Frontend", items: ["Next.js", "React", "React Native", "TypeScript", "Tailwind"] },
+  { key: "backend", group: "Backend", items: ["Node.js", "Express.js", "Django", "Python"] },
+  { key: "database", group: "Database", items: ["MySQL", "MongoDB", "Redis"] },
+  { key: "cloud", group: "Cloud", items: ["AWS", "Docker", "Nginx", "ElasticSearch"] },
+  { key: "ai_tools", group: "AI / Tools", items: ["LangChain", "Git", "Linux"] },
 ];
 
 export const portfolioApproach: ApproachPhase[] = [
   {
-    n: "Phase 01",
+    n: "01",
+    fn: "map_the_territory",
     title: "Map the territory",
-    body: "I start by understanding the actual problem — users, constraints, success metrics. Site structure, navigation, and content come out of that, not before it.",
+    body: "Start by understanding the actual problem — users, constraints, success metrics. Site structure, navigation, and content come out of that, not before it.",
   },
   {
-    n: "Phase 02",
+    n: "02",
+    fn: "build_in_public",
     title: "Build in public",
-    body: "Cue the lo-fi. I work in tight loops — small, shippable slices — and keep you in the thread the whole way. No surprises at delivery.",
+    body: "Work in tight loops — small, shippable slices — and keep you in the thread the whole way. No surprises at delivery. Cue the lo-fi.",
   },
   {
-    n: "Phase 03",
+    n: "03",
+    fn: "ship_and_sharpen",
     title: "Ship & sharpen",
     body: "From approved design to production code, with measurable checks on performance, accessibility, and the small interactions that make a product feel alive.",
   },

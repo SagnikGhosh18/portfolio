@@ -1,31 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono, Fraunces } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-serif",
-  weight: ["400"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-display",
-  axes: ["WONK"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
@@ -112,7 +91,7 @@ const jsonLd = {
   ],
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Bengaluru",
+    addressLocality: "Pune",
     addressCountry: "IN",
   },
 };
@@ -130,9 +109,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body
-        className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
-      >
+      <body className={jetbrainsMono.variable}>
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
