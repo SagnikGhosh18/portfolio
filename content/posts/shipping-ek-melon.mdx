@@ -1,0 +1,27 @@
+---
+title: "Shipping Ek Melon: a vision model in the fruit aisle"
+date: 2026-04-20
+tag: ai
+excerpt: "Building a Gemini Vision pipeline, a feedback loop for labelled data, and a 5.0-rated iOS app — solo."
+snippet: "photo → gemini.vision()\n  → { ripeness, confidence }\n  → explain(lang)"
+---
+
+[Ek Melon](https://apps.apple.com/in/app/ek-melon/id6761439309) does one thing: you take a photo of a watermelon and it tells you whether the melon is ripe.
+
+## The pipeline
+
+The app is built with React Native and Supabase. A photo goes to Gemini Vision, which scores four visual dimensions. The app turns those scores into:
+
+- a ripeness verdict with a **confidence** score
+- a **plain-language breakdown** of why
+- all of it in **4+ Indian languages**
+
+## Closing the loop
+
+A vision model is only as good as its feedback. The app records what users find out after cutting the melon, which builds up a labelled dataset over time.
+
+## Solo, end to end
+
+I did the design, the pipeline, the app and the App Store release myself. It's rated **5.0** on the App Store.
+
+{/* TODO: expand — prompt design for consistent scoring, cost per scan, localisation */}

@@ -1,0 +1,35 @@
+---
+title: "Grounding a RAG system in fire codes: how we got to 87%"
+date: 2026-09-22
+tag: ai
+excerpt: "What it took to keep an LLM honest in a compliance-sensitive domain — retrieval over NFPA references, grounding, and measuring against real technician feedback."
+snippet: "retrieve(nfpa_refs)\n  → ground(deficiency)\n  → quote(line_items)\n\naccuracy: 0.87 ✓"
+---
+
+Fire inspection is a domain where "plausible" isn't good enough. When a technician finds a deficiency, the quote that follows has to cite the right code and list the right line items. If an LLM confidently invents an NFPA section, that's a liability, not a typo.
+
+At ZenTrades.ai I built a self-hosted RAG system that drafts those deficiency quotes. This is how it's put together, and how we measured whether it worked.
+
+## Retrieval first, generation second
+
+The model never answers from memory. Every request goes through three steps:
+
+```
+retrieve(nfpa_refs)   // pull the relevant code sections from ChromaDB
+  → ground(deficiency) // constrain the model to what was retrieved
+  → quote(line_items)  // produce structured, priceable line items
+```
+
+The service is Django with ChromaDB as the vector store and LangChain handling orchestration. Self-hosting kept customer inspection data in our own infrastructure.
+
+## Tuning for honesty, not fluency
+
+Most of the work went into retrieval, not prompts. If the right code section isn't in the context, no prompt will save you. So we iterated on what gets embedded, how it's chunked and how much gets retrieved, with one goal: cut hallucination in a compliance domain.
+
+## Measuring against the field
+
+Offline benchmarks only tell you so much. The number we cared about came from the people who use the output: field technicians scored the generated deficiencies against what they would have written themselves.
+
+**87% accuracy** on that measure is the number I'm proudest of. It comes from real work orders, not a synthetic test set.
+
+{/* TODO: expand — chunking strategy, failure modes, what the 13% looked like */}

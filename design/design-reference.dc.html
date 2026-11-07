@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sagnik Ghosh — Software Engineer</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit}a:hover{color:inherit}
+.tt, .tt *{transition: background-color .35s ease, border-color .35s ease, color .35s ease, transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, opacity .25s ease, background-size .3s ease}
+.rise{animation: rise .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.blink{animation: blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.pulse{position:relative}
+.pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:currentColor;animation:ping 2.2s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.55}80%,100%{transform:scale(2.8);opacity:0}}
+.spin-in{animation: spin-in .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes spin-in{from{opacity:0;transform:rotate(-90deg) scale(.6)}to{opacity:1;transform:none}}
+.nl{background-image:linear-gradient(var(--acc),var(--acc));background-position:0 calc(100% - 8px);background-size:0 1px;background-repeat:no-repeat}
+.nl:hover{color:var(--ink) !important;background-size:100% 1px}
+.lift:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px var(--shadow);border-color:var(--line3) !important}
+.lift:hover .metric{transform:translateX(4px)}
+.nudge svg{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.nudge:hover svg{transform:translate(3px,-3px)}
+.push svg{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.push:hover svg{transform:translateX(4px)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.ghost:hover{border-color:var(--acc) !important;color:var(--acc) !important}
+.chip:hover{border-color:var(--acc) !important;transform:translateY(-2px)}
+.row:hover{background:var(--surface2) !important}
+.row:hover .row-title{color:var(--acc) !important}
+.row .row-arrow{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.row:hover .row-arrow{transform:translateX(6px)}
+.toggle:hover{border-color:var(--acc) !important}
+a:focus-visible, button:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:8px}
+@supports (animation-timeline: view()){
+.reveal{animation: rise linear both;animation-timeline: view();animation-range: entry 0% entry 55%}
+}
+@media (prefers-reduced-motion: reduce){
+.tt *, .tt{animation:none !important;transition:none !important}
+.pulse::after{display:none}
+}
+</style>
+</helmet>
+<div class="tt" style="--bg: {{t.bg}}; --surface: {{t.surface}}; --surface2: {{t.surface2}}; --line: {{t.line}}; --line2: {{t.line2}}; --line3: {{t.line3}}; --ink: {{t.ink}}; --body: {{t.body}}; --muted: {{t.muted}}; --dot: {{t.dot}}; --grid: {{t.grid}}; --header: {{t.header}}; --acc: {{t.acc}}; --btn-bg: {{t.btnBg}}; --btn-ink: {{t.btnInk}}; --shadow: {{t.shadow}}; background: var(--bg); color: var(--ink); font-family: 'Bricolage Grotesque', system-ui, sans-serif; min-height: 100vh; overflow-x: hidden">
+
+<!-- NAV -->
+<header style="position: sticky; top: 0; z-index: 10; background: var(--header); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line)">
+<nav aria-label="Primary" style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); min-height: 64px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px">
+<a href="#top" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; text-decoration: none; display: flex; align-items: center; min-height: 44px">
+<span style="color: var(--acc)">~/</span>sagnik<span class="blink" style="color: var(--acc)">_</span>
+</a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px; font-family: 'JetBrains Mono', monospace; font-size: 13px">
+<a class="nl" href="#work" style="text-decoration: none; color: var(--muted); padding: 13px 0">work</a>
+<a class="nl" href="#stack" style="text-decoration: none; color: var(--muted); padding: 13px 0">stack</a>
+<a class="nl" href="#experience" style="text-decoration: none; color: var(--muted); padding: 13px 0">log</a>
+<a class="nl" href="#writing" style="text-decoration: none; color: var(--muted); padding: 13px 0">writing</a>
+<a class="nl" href="#contact" style="text-decoration: none; color: var(--muted); padding: 13px 0">contact</a>
+<button class="toggle" type="button" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" title="{{themeLabel}}" style="width: 44px; height: 44px; margin-left: 4px; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; border: 1px solid var(--line2); background: var(--surface); color: var(--ink); cursor: pointer; padding: 0">
+<sc-if value="{{dark}}" hint-placeholder-val="{{ true }}">
+<svg class="spin-in" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+</sc-if>
+<sc-if value="{{light}}" hint-placeholder-val="{{ false }}">
+<svg class="spin-in" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+</sc-if>
+</button>
+</div>
+</nav>
+</header>
+
+<!-- HERO -->
+<section id="top" style="background-image: radial-gradient(var(--dot) 1px, transparent 1px); background-size: 28px 28px; border-bottom: 1px solid var(--line)">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 10vw, 128px) clamp(20px, 5vw, 56px) clamp(56px, 8vw, 104px); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(40px, 6vw, 72px)">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div class="rise" style="animation-delay: 0ms; display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid var(--line2); border-radius: 999px; background: var(--surface); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--body)">
+<span class="pulse" style="width: 8px; height: 8px; border-radius: 50%; background: var(--acc); color: var(--acc)"></span>
+open to interesting projects
+</div>
+<h1 class="rise" style="animation-delay: 90ms; margin: 0; font-size: clamp(52px, 10vw, 128px); line-height: 0.92; letter-spacing: -0.04em; font-weight: 800">Sagnik<br>Ghosh<span style="color: var(--acc)">.</span></h1>
+<p class="rise" style="animation-delay: 180ms; margin: 0; max-width: 560px; font-size: clamp(18px, 2vw, 22px); line-height: 1.5; color: var(--body)">Software engineer building production systems across <span style="color: var(--ink); font-weight: 700">applied AI, payments and correctness-critical billing</span>. Currently at Allo Health, rebuilding pharmacy inventory from the ground up.</p>
+<div class="rise" style="animation-delay: 270ms; display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn push" href="#work" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 10px; background: var(--btn-bg); color: var(--btn-ink); font-weight: 700; font-size: 16px; text-decoration: none">See selected work
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+<a class="btn ghost" href="mailto:sagnikghosh18@gmail.com" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 10px; border: 1px solid var(--line3); font-weight: 500; font-size: 16px; text-decoration: none">Get in touch</a>
+</div>
+<div class="rise" style="animation-delay: 360ms; display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted)">
+<span>Bangalore, IN · UTC+5:30</span>
+<span>B.Tech CSE · VIT Vellore, Gold Medal</span>
+</div>
+</div>
+
+<!-- code card: stays dark in both themes -->
+<div class="rise" style="animation-delay: 240ms; flex: 1 1 380px; min-width: 0; max-width: 100%; border: 1px solid #262B28; border-radius: 16px; background: #111412; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.55)">
+<div style="display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid #222724">
+<span style="width: 11px; height: 11px; border-radius: 50%; background: #3A403C"></span>
+<span style="width: 11px; height: 11px; border-radius: 50%; background: #3A403C"></span>
+<span style="width: 11px; height: 11px; border-radius: 50%; background: #3A403C"></span>
+<span style="margin-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8E948F">profile.ts</span>
+</div>
+<div style="padding: 22px 20px 26px; overflow-x: auto; white-space: pre; font-family: 'JetBrains Mono', monospace; font-size: clamp(12px, 1.3vw, 14px); line-height: 1.85; color: #C9CCC6">
+<div class="rise" style="animation-delay: 500ms; color: #7C8580">// who I am, typed</div>
+<div class="rise" style="animation-delay: 580ms"><span style="color: #F2A97B">export const</span> <span style="color: #ECEAE4">sagnik</span> = {</div>
+<div class="rise" style="animation-delay: 660ms">  role: <span style="color: {{accent}}">"Software Engineer"</span>,</div>
+<div class="rise" style="animation-delay: 740ms">  company: <span style="color: {{accent}}">"Allo Health"</span>,</div>
+<div class="rise" style="animation-delay: 820ms">  previously: <span style="color: {{accent}}">"ZenTrades.ai"</span>,</div>
+<div class="rise" style="animation-delay: 900ms">  stack: [<span style="color: {{accent}}">"TS"</span>, <span style="color: {{accent}}">"NestJS"</span>, <span style="color: {{accent}}">"React"</span>, <span style="color: {{accent}}">"Django"</span>],</div>
+<div class="rise" style="animation-delay: 980ms">  focus: [<span style="color: {{accent}}">"RAG"</span>, <span style="color: {{accent}}">"payments"</span>, <span style="color: {{accent}}">"billing"</span>],</div>
+<div class="rise" style="animation-delay: 1060ms">  certified: <span style="color: {{accent}}">"AWS SA-Associate"</span>,</div>
+<div class="rise" style="animation-delay: 1140ms">  shipsFast: <span style="color: #8DB8F5">true</span>,</div>
+<div class="rise" style="animation-delay: 1220ms">};<span class="blink" style="color: {{accent}}">▍</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- IMPACT STRIP -->
+<section aria-label="Impact" style="border-bottom: 1px solid var(--line)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr))">
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+<div class="reveal" style="padding: clamp(24px, 4vw, 40px) 0; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); margin-top: -1px">
+<div style="font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1">{{s.value}}</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.5; color: var(--muted); max-width: 220px; padding-right: 16px">{{s.label}}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- ABOUT + STACK -->
+<section id="stack" style="border-bottom: 1px solid var(--line)">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 56px); display: flex; flex-wrap: wrap; gap: clamp(40px, 6vw, 80px)">
+<div class="reveal" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--acc)">01 — about</div>
+<h2 style="margin: 0; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700">I build the systems where being wrong costs money.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: var(--body)">Billing, tax, payments and compliance — the parts of a product where a rounding error or a hallucination is a real problem. I work end to end, schema to screen, and back it with tests that catch what unit tests miss.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: var(--body)">At ZenTrades.ai I built a self-hosted RAG system for fire-inspection quotes and a recurring-invoicing engine on a platform past 1M invoices. At Allo Health I’m replacing a third-party ERP with an in-house, multi-entity pharmacy inventory engine.</p>
+</div>
+<div class="reveal" style="flex: 1.4 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--acc)">02 — stack</div>
+<div style="display: flex; flex-direction: column; border-top: 1px solid var(--line2)">
+<sc-for list="{{stack}}" as="g" hint-placeholder-count="6">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; padding: 20px 0; border-bottom: 1px solid var(--line2)">
+<div style="flex: 0 0 120px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted)">{{g.name}}</div>
+<div style="flex: 1 1 240px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{g.items}}" as="tech" hint-placeholder-count="4">
+<span class="chip" style="padding: 6px 12px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--line2); font-size: 15px; font-weight: 500">{{tech}}</span>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<!-- WORK -->
+<section id="work" style="border-bottom: 1px solid var(--line)">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 56px); display: flex; flex-direction: column; gap: clamp(32px, 5vw, 56px)">
+<div class="reveal" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--acc)">03 — selected work</div>
+<h2 style="margin: 0; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700">Things I’ve shipped.</h2>
+</div>
+<p style="margin: 0; max-width: 360px; font-size: 15px; line-height: 1.6; color: var(--muted)">Production systems and side builds, each with the number I’m proudest of.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 20px">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="6">
+<article class="lift reveal" style="display: flex; flex-direction: column; border: 1px solid var(--line2); border-radius: 18px; background: var(--surface); overflow: hidden">
+<div style="height: clamp(180px, 22vw, 240px); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; background-color: var(--surface2); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 32px 32px; border-bottom: 1px solid var(--line2)">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)">
+<span>{{p.index}} / {{p.role}}</span>
+<span>{{p.kicker}}</span>
+</div>
+<div class="metric" style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-size: clamp(40px, 6vw, 72px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; color: var(--acc)">{{p.metric}}</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--body)">{{p.metricLabel}}</div>
+</div>
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 14px; flex-grow: 1">
+<h3 style="margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.02em">{{p.name}}</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--body); flex-grow: 1">{{p.desc}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{p.tech}}" as="tech" hint-placeholder-count="4">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line3); color: var(--body)">{{tech}}</span>
+</sc-for>
+</div>
+<a class="nudge" href="{{p.href}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-decoration: none; color: var(--ink)">{{p.cta}}
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+</a>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="border-bottom: 1px solid var(--line)">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 56px); display: flex; flex-wrap: wrap; gap: clamp(32px, 6vw, 80px)">
+<div class="reveal" style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--acc)">04 — git log --career</div>
+<h2 style="margin: 0; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700">Where I’ve committed.</h2>
+<a class="btn ghost" href="#" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px; margin-top: 8px; border-radius: 10px; border: 1px solid var(--line3); font-family: 'JetBrains Mono', monospace; font-size: 13px; text-decoration: none">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"></path></svg>
+resume.pdf
+</a>
+<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)">certifications</div>
+<a class="lift nudge" href="https://www.credly.com/badges/ac4cb1b2-0ad5-4c98-bcb5-40556ca7124a/public_url" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line2); background: var(--surface); text-decoration: none">
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 700">AWS Solutions Architect</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)">Associate · verify</span></span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+</a>
+<a class="lift nudge" href="https://www.credly.com/badges/c28ed8c1-374d-46e7-ae9a-e72fc8665317/public_url" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line2); background: var(--surface); text-decoration: none">
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 700">Microsoft Technology Associate</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)">Programming in Java · verify</span></span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+</a>
+</div>
+</div>
+<div style="flex: 2 1 520px; min-width: 0; display: flex; flex-direction: column">
+<sc-for list="{{jobs}}" as="j" hint-placeholder-count="4">
+<div class="reveal" style="display: flex; gap: 20px">
+<div style="display: flex; flex-direction: column; align-items: center; flex: 0 0 14px">
+<span class="{{j.dotClass}}" style="width: 12px; height: 12px; margin-top: 8px; border-radius: 50%; border: 2px solid {{j.dot}}; background: {{j.dotFill}}; color: {{j.dot}}"></span>
+<span style="flex-grow: 1; width: 1px; background: var(--line2)"></span>
+</div>
+<div style="flex: 1 1 auto; min-width: 0; padding-bottom: 44px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em">{{j.role}} <span style="color: var(--muted); font-weight: 500">@ {{j.company}}</span></h3>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)">{{j.dates}}</span>
+</div>
+<ul style="margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{j.points}}" as="pt" hint-placeholder-count="3">
+<li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: var(--body)"><span style="color: var(--acc); font-family: 'JetBrains Mono', monospace">+</span><span>{{pt}}</span></li>
+</sc-for>
+</ul>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- WRITING -->
+<section id="writing" style="border-bottom: 1px solid var(--line)">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 56px); display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px)">
+<div class="reveal" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--acc)">05 — writing</div>
+<h2 style="margin: 0; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700">Notes from production.</h2>
+</div>
+<div role="group" aria-label="Filter posts by topic" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{tags}}" as="tg" hint-placeholder-count="4">
+<button class="chip" type="button" onClick="{{tg.pick}}" aria-pressed="{{tg.pressed}}" style="{{tg.style}}">{{tg.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<!-- featured -->
+<sc-if value="{{hasFeatured}}" hint-placeholder-val="{{ true }}">
+<a class="lift reveal" href="{{featured.href}}" style="display: flex; flex-wrap: wrap; text-decoration: none; border: 1px solid var(--line2); border-radius: 20px; background: var(--surface); overflow: hidden">
+<div style="flex: 1 1 320px; min-height: 220px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; background-color: var(--surface2); background-image: radial-gradient(var(--dot) 1px, transparent 1px); background-size: 18px 18px; border-right: 1px solid var(--line2)">
+<span style="align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: var(--btn-bg); color: var(--btn-ink)">featured</span>
+<div class="metric" style="font-family: 'JetBrains Mono', monospace; font-size: clamp(14px, 1.6vw, 16px); line-height: 1.7; color: var(--body); white-space: pre-wrap">{{featured.snippet}}</div>
+</div>
+<div style="flex: 1.3 1 360px; min-width: 0; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; justify-content: center">
+<div style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)"><span style="color: var(--acc)">{{featured.tag}}</span><span>{{featured.date}}</span><span>{{featured.read}}</span></div>
+<h3 class="row-title" style="margin: 0; font-size: clamp(26px, 3vw, 36px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 700">{{featured.title}}</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--body)">{{featured.excerpt}}</p>
+<span class="push" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-family: 'JetBrains Mono', monospace; font-size: 13px">read post
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</span>
+</div>
+</a>
+</sc-if>
+
+<!-- list -->
+<div style="display: flex; flex-direction: column; border-top: 1px solid var(--line2)">
+<sc-for list="{{rest}}" as="b" hint-placeholder-count="3">
+<a class="row reveal" href="{{b.href}}" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 22px 12px; margin: 0 -12px; border-bottom: 1px solid var(--line2); border-radius: 12px; text-decoration: none; background: transparent">
+<div style="flex: 0 0 150px; display: flex; flex-direction: column; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)"><span style="color: var(--acc)">{{b.tag}}</span><span>{{b.date}} · {{b.read}}</span></div>
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<h3 class="row-title" style="margin: 0; font-size: clamp(19px, 2vw, 22px); line-height: 1.25; font-weight: 700; letter-spacing: -0.01em">{{b.title}}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--body)">{{b.excerpt}}</p>
+</div>
+<svg class="row-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 20px"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</sc-for>
+<sc-if value="{{noRest}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 22px 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted)">That’s the only post in this topic so far.</p>
+</sc-if>
+</div>
+<a class="btn ghost push" href="#" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px; border-radius: 10px; border: 1px solid var(--line3); font-family: 'JetBrains Mono', monospace; font-size: 13px; text-decoration: none">all posts
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(72px, 11vw, 144px) clamp(20px, 5vw, 56px) 48px; display: flex; flex-direction: column; gap: 32px">
+<div class="reveal" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--acc)">06 — contact</div>
+<h2 class="reveal" style="margin: 0; font-size: clamp(40px, 8vw, 104px); line-height: 0.95; letter-spacing: -0.045em; font-weight: 800; max-width: 1000px">Got something worth building?</h2>
+<a class="reveal" href="mailto:sagnikghosh18@gmail.com" style="align-self: flex-start; max-width: 100%; overflow-wrap: anywhere; font-size: clamp(20px, 3vw, 34px); font-weight: 500; color: var(--acc); text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 2px">sagnikghosh18@gmail.com</a>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn ghost" href="https://github.com/SagnikGhosh18" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--line3); font-family: 'JetBrains Mono', monospace; font-size: 13px; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.4 6.4-1.5 6.4-6.9a5.4 5.4 0 0 0-1.5-3.7 5 5 0 0 0-.1-3.8s-1.2-.4-3.9 1.5a13.4 13.4 0 0 0-7 0C6.3 1.6 5.1 2 5.1 2a5 5 0 0 0-.1 3.8 5.4 5.4 0 0 0-1.5 3.7c0 5.4 3.3 6.5 6.4 6.9a3.4 3.4 0 0 0-.9 2.6V22"></path></svg>
+github/SagnikGhosh18
+</a>
+<a class="btn ghost" href="https://www.linkedin.com/in/sagnik-ghosh-49b25820b/" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--line3); font-family: 'JetBrains Mono', monospace; font-size: 13px; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path></svg>
+in/sagnik-ghosh
+</a>
+</div>
+<div style="margin-top: clamp(48px, 8vw, 96px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted)">
+<span>© 2026 Sagnik Ghosh</span>
+<span>designed &amp; built in Bangalore</span>
+</div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C8F169","options":["#C8F169","#7FD8F5","#F2A97B","#B9A6FF"]},"startDark":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":6400}}'>
+class Component extends DCLogic {
+  shade(hex, k) {
+    var h = String(hex || '').replace('#', '');
+    if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+    if (h.length !== 6) return '#4E6420';
+    var n = parseInt(h, 16);
+    var r = Math.round(((n >> 16) & 255) * k), g = Math.round(((n >> 8) & 255) * k), b = Math.round((n & 255) * k);
+    return '#' + [r, g, b].map(function (v) { return ('0' + v.toString(16)).slice(-2); }).join('');
+  }
+
+  renderVals() {
+    var shade = this.shade;
+    var self = this;
+    var st = this.state || {};
+    var accent = this.props.accent ?? '#C8F169';
+    var dark = st.dark !== undefined ? st.dark : (this.props.startDark ?? true);
+    var tag = st.tag || 'all';
+
+    var t = dark ? {
+      bg: '#0C0E0D', surface: '#111412', surface2: '#151916', line: '#1E2320', line2: '#262B28', line3: '#343B37',
+      ink: '#ECEAE4', body: '#B9BDB7', muted: '#8E948F', dot: '#232825', grid: '#1C211E',
+      header: 'rgba(12,14,13,0.82)', acc: accent, btnBg: accent, btnInk: '#0C0E0D', shadow: 'rgba(0,0,0,0.8)'
+    } : {
+      bg: '#F5F4EF', surface: '#FFFFFF', surface2: '#EDECE6', line: '#E3E1D9', line2: '#D9D6CC', line3: '#C2BEB2',
+      ink: '#151716', body: '#3E4440', muted: '#5C635E', dot: '#D6D3C9', grid: '#E2E0D8',
+      header: 'rgba(245,244,239,0.85)', acc: shade(accent, 0.45), btnBg: '#151716', btnInk: accent, shadow: 'rgba(40,40,30,0.35)'
+    };
+
+    var posts = [
+      { tag: 'ai', title: 'Grounding a RAG system in fire codes: how we got to 87%', excerpt: 'What it took to keep an LLM honest in a compliance-sensitive domain — retrieval over NFPA references, grounding, and measuring against real technician feedback.', snippet: 'retrieve(nfpa_refs)\n  → ground(deficiency)\n  → quote(line_items)\n\naccuracy: 0.87 ✓', date: '[DATE]', read: '[N] min read', href: '#' },
+      { tag: 'performance', title: 'One browser to rule them all: cutting Puppeteer memory by 80%', excerpt: 'Why a browser per PDF doesn’t scale, and what changed when we moved to a single shared instance.', date: '[DATE]', read: '[N] min read', href: '#' },
+      { tag: 'backend', title: 'Ownership is not location: modelling multi-entity pharmacy stock', excerpt: 'How one batch of medicine can be owned and valued differently from wholesaler to franchise to patient.', date: '[DATE]', read: '[N] min read', href: '#' },
+      { tag: 'backend', title: 'Recurring invoices are a tree, not a cron job', excerpt: 'Parent-to-child templates that survive edits, pauses, skipped dates and cancellations.', date: '[DATE]', read: '[N] min read', href: '#' },
+      { tag: 'ai', title: 'Shipping Ek Melon: a vision model in the fruit aisle', excerpt: 'Building a Gemini Vision pipeline, a feedback loop for labelled data, and a 5.0-rated iOS app — solo.', date: '[DATE]', read: '[N] min read', href: '#' }
+    ];
+    var shown = tag === 'all' ? posts : posts.filter(function (p) { return p.tag === tag; });
+    var featured = shown[0] || posts[0];
+    var rest = shown.slice(1);
+
+    var tagList = [['all', 'All'], ['ai', 'AI'], ['backend', 'Backend'], ['performance', 'Performance']];
+    var tags = tagList.map(function (x) {
+      var on = x[0] === tag;
+      return {
+        label: x[1],
+        pressed: on ? 'true' : 'false',
+        pick: function () { self.setState({ tag: x[0] }); },
+        style: 'min-height: 44px; padding: 0 16px; border-radius: 999px; cursor: pointer; font-family: \'JetBrains Mono\', monospace; font-size: 13px; border: 1px solid ' + (on ? 'var(--btn-bg)' : 'var(--line3)') + '; background: ' + (on ? 'var(--btn-bg)' : 'transparent') + '; color: ' + (on ? 'var(--btn-ink)' : 'var(--ink)')
+      };
+    });
+
+    return {
+      accent: accent,
+      t: t,
+      dark: dark,
+      light: !dark,
+      themeLabel: dark ? 'Switch to light theme' : 'Switch to dark theme',
+      toggleTheme: function () { self.setState({ dark: !dark }); },
+      tags: tags,
+      featured: featured,
+      hasFeatured: !!featured,
+      rest: rest,
+      noRest: rest.length === 0,
+      stats: [
+        { value: '1M+', label: 'invoices processed on the platform my billing engine runs on' },
+        { value: '87%', label: 'accuracy on RAG-generated deficiencies, scored by field technicians' },
+        { value: '~8 wks', label: 'to ship an in-house inventory system replacing Zoho' },
+        { value: '50–80%', label: 'less memory after refactoring Puppeteer PDF generation' }
+      ],
+      stack: [
+        { name: 'languages', items: ['TypeScript', 'JavaScript', 'Python', 'Java'] },
+        { name: 'ai / ml', items: ['RAG pipelines', 'LangChain', 'ChromaDB', 'Vector search', 'LLM integration'] },
+        { name: 'frontend', items: ['React', 'Next.js', 'React Native', 'Tailwind', 'Sass'] },
+        { name: 'backend', items: ['NestJS', 'Node.js', 'Express', 'Django', 'TypeORM'] },
+        { name: 'data', items: ['MySQL', 'MongoDB', 'Redis', 'Elasticsearch'] },
+        { name: 'infra + test', items: ['AWS', 'Docker', 'Nginx', 'Linux', 'Jest', 'RTL'] }
+      ],
+      projects: [
+        { index: '01', role: 'allo health', kicker: 'inventory · billing', metric: '~8 wks', metricLabel: 'from zero to replacing Zoho Inventory', name: 'Pharmacy Inventory Engine', desc: 'Multi-entity stock model that separates ownership from location, so one batch can be valued differently from wholesaler to franchise to patient. Pricing, GST and MRP caps live server-side.', tech: ['NestJS', 'TypeScript', 'MySQL', 'E2E tests'], cta: 'case study', href: '#' },
+        { index: '02', role: 'zentrades.ai', kicker: 'applied ai', metric: '87%', metricLabel: 'accuracy vs real technician feedback', name: 'RAG Deficiency Quotes', desc: 'Self-hosted RAG system that drafts fire-inspection deficiency quotes and line items grounded in NFPA codes — retrieval tuned to cut hallucination in a compliance domain.', tech: ['Django', 'ChromaDB', 'LangChain', 'LLMs'], cta: 'case study', href: '#' },
+        { index: '03', role: 'zentrades.ai', kicker: 'billing · payments', metric: '1M+', metricLabel: 'invoices on the platform', name: 'Recurring Invoicing', desc: 'Designed and shipped solo: a parent-to-child template hierarchy supporting edits, pausing, date-skipping and cancellation, plus bulk future-schedule edits in React.', tech: ['React', 'Node.js', 'MySQL', 'Stripe'], cta: 'case study', href: '#' },
+        { index: '04', role: 'solo · ios', kicker: 'ai vision', metric: '5.0', metricLabel: 'rating on the App Store', name: 'Ek Melon', desc: 'Snap a watermelon, get a ripeness verdict. Gemini Vision scores four visual dimensions with a confidence and plain-language breakdown, in 4+ Indian languages.', tech: ['React Native', 'Supabase', 'Gemini Vision'], cta: 'app store', href: 'https://apps.apple.com/in/app/ek-melon/id6761439309' },
+        { index: '05', role: 'design + build', kicker: 'web', metric: '91', metricLabel: 'lighthouse performance', name: 'YC Directory', desc: 'Startup pitch platform with GitHub OAuth and live content from Sanity CMS.', tech: ['Next.js 15', 'Sanity', 'TypeScript', 'Tailwind'], cta: 'live site', href: '#' },
+        { index: '06', role: 'frontend', kicker: 'web', metric: '98', metricLabel: 'lighthouse performance', name: 'HiLink — Travel', desc: 'Landing experience for an outdoor-trip planner, tuned for speed on every screen.', tech: ['Next.js', 'Tailwind', 'TypeScript'], cta: 'live site', href: '#' }
+      ],
+      jobs: [
+        { role: 'Software Engineer', company: 'Allo Health', dates: 'Jun 2026 – present', dot: t.acc, dotFill: t.acc, dotClass: 'pulse', points: ['Built the core of an in-house pharmacy inventory and billing system in ~8 weeks, replacing a rate-limited Zoho Inventory dependency', 'Modelled stock ownership separately from location — multi-entity valuation the old tool couldn’t represent', 'Moved pricing and tax server-side (discount rules, date-aware GST, MRP cap); B2B + B2C end-to-end tests caught five defects unit tests missed'] },
+        { role: 'Software Engineer', company: 'ZenTrades.ai', dates: 'Jul 2024 – May 2026', dot: t.line3, dotFill: t.bg, dotClass: '', points: ['Built a self-hosted RAG system (Django + ChromaDB) for NFPA-grounded inspection quotes — 87% accuracy against field feedback', 'Designed and shipped, solo, the recurring-invoicing engine on a platform past 1M invoices', 'Country-specific Stripe surcharges, capping Canada at the mandated 2.4% ahead of market entry', 'Parallel document generation on AWS Lambda + Apps Script: under 5 minutes, no more timeouts', 'Shared-browser Puppeteer refactor: 50–80% less memory, 30–60% less CPU', 'Scheduler refactor cut page load times by over 50%'] },
+        { role: 'Associate Developer', company: 'ZenTrades.ai', dates: 'Feb – Jul 2024', dot: t.line3, dotFill: t.bg, dotClass: '', points: ['Saved filter preferences that cut user interaction steps by over 75%'] },
+        { role: 'B.Tech, Computer Science', company: 'VIT Vellore', dates: '2020 – 2024', dot: t.line3, dotFill: t.bg, dotClass: '', points: ['Gold Medalist — highest-scoring student in the stream'] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

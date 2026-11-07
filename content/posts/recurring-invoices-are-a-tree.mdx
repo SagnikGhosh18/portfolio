@@ -1,0 +1,28 @@
+---
+title: "Recurring invoices are a tree, not a cron job"
+date: 2026-06-02
+tag: backend
+excerpt: "Parent-to-child templates that survive edits, pauses, skipped dates and cancellations."
+snippet: "template\n ├─ invoice 2026-01\n ├─ invoice 2026-02 (skipped)\n └─ invoice 2026-03 (edited)"
+---
+
+"Send this invoice every month" sounds like a cron job. Then customers start asking for things: change the amount from March onwards, skip April, pause for the summer, cancel but keep history.
+
+At ZenTrades.ai I designed and shipped the recurring-invoicing engine on my own. It runs on a platform that has processed more than a million invoices.
+
+## Parent and children
+
+The model is a hierarchy. A parent template describes the schedule and the defaults. Each generated invoice is a child that records which template produced it and when.
+
+Every operation becomes a question about the tree:
+
+- **Edit** changes the parent and applies to future children. Past ones stay untouched.
+- **Skip** marks one future occurrence without changing the schedule.
+- **Pause** and **resume** stop and restart generation without losing the template.
+- **Cancel** ends the schedule, and every invoice already issued stays as it was.
+
+## Bulk edits in the UI
+
+The React side lets users edit future schedules in bulk. That was only possible because the backend already treated "the future of this template" as something you can query and change.
+
+{/* TODO: expand — idempotent generation, timezone edges, Stripe integration */}

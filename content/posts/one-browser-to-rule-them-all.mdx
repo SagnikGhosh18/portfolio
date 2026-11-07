@@ -1,0 +1,39 @@
+---
+title: "One browser to rule them all: cutting Puppeteer memory by 80%"
+date: 2026-07-14
+tag: performance
+excerpt: "Why a browser per PDF doesn’t scale, and what changed when we moved to a single shared instance."
+snippet: "- launch() per PDF\n+ browser = shared()\n+ page = browser.newPage()\n\nmemory: −50–80%"
+---
+
+PDF generation with Puppeteer starts simple: launch a browser, render the page, print, close. That works fine until a lot of documents are being generated at the same time.
+
+## A browser per PDF
+
+Every `launch()` starts a full Chromium process. With one per document, memory and CPU grow linearly with concurrency, and a burst of invoices or reports turns into a burst of browsers.
+
+## One shared browser
+
+The refactor kept one long-lived browser instance and gave each document its own page:
+
+```ts
+const browser = await getSharedBrowser(); // launched once, reused
+const page = await browser.newPage();
+try {
+  await page.setContent(html);
+  return await page.pdf(options);
+} finally {
+  await page.close();
+}
+```
+
+Pages are cheap and processes are not.
+
+## Result
+
+- **50–80% less memory**
+- **30–60% less CPU**
+
+The `finally` matters. With a shared browser, a leaked page leaks for the life of the process, not just for one request.
+
+{/* TODO: expand — crash recovery for the shared instance, concurrency limits */}

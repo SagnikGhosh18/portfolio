@@ -1,0 +1,29 @@
+---
+title: "Ownership is not location: modelling multi-entity pharmacy stock"
+date: 2026-08-25
+tag: backend
+excerpt: "How one batch of medicine can be owned and valued differently from wholesaler to franchise to patient."
+snippet: "batch.location  = 'franchise:blr-04'\nbatch.owner     = 'wholesaler'\nbatch.valuation = owner.price(batch)"
+---
+
+At Allo Health we replaced a rate-limited Zoho Inventory dependency with an in-house pharmacy inventory and billing system. The core shipped in about eight weeks. The decision that shaped everything else was small: **the place where stock sits is not the same thing as who owns it.**
+
+## The problem with "stock at a location"
+
+Most off-the-shelf inventory tools treat a warehouse or store as the unit of ownership. If a box is on the shelf, it belongs to that shelf.
+
+Pharmacy distribution doesn't work like that. One batch of medicine can move from a wholesaler to a franchise to a patient. Along the way it can sit somewhere it isn't owned, and the same batch can be valued differently depending on who owns it. The old tool simply couldn't represent that.
+
+## Two dimensions, not one
+
+We modelled ownership and location as separate dimensions on stock. A batch has a place where it physically is and an entity that owns it, and its valuation follows the owner. Once that was true, multi-entity valuation stopped being a special case.
+
+## Money lives on the server
+
+We also moved pricing and tax server-side: discount rules, date-aware GST and the MRP cap. Clients display numbers but never compute them.
+
+## Tests at the seams
+
+Unit tests passed while real flows were still broken. End-to-end tests covering both B2B and B2C flows caught **five defects that the unit tests missed**. For billing, the end-to-end test is the one that matters.
+
+{/* TODO: expand — schema sketch, migration from Zoho, what we'd do differently */}
